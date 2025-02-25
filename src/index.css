@@ -9,5 +9,8 @@ body {
   width: 30px;
   margin-right: 10px;
 }
-
+.coverImg {
+  width: 120px;
+  height: 180px;
+}
 /* Add your own custom styles here */
