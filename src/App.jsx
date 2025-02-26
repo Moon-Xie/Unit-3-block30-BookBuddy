@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import bookLogo from './assets/books.png'
 import Books from './components/Books'
+import { Routes,Route } from 'react-router-dom'
+import SingleBook from './components/SingleBook'
 
 function App() {
   const [token, setToken] = useState(null)
@@ -13,9 +15,12 @@ function App() {
         <h1>Filter function here</h1>
         <h3>login/sign up</h3>
       </nav>
-      <div className='bookCards'>
-        <Books setBooks={setBooks}/>
-      </div>
+      <Routes>
+        <Route path='/books' element={<Books setBooks={setBooks}/>}/>
+        {/**/}
+        <Route path='/books/:id' element={<SingleBook  />}/>
+
+      </Routes>
     </>
   )
 }

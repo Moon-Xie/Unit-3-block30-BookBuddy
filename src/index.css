@@ -9,8 +9,18 @@ body {
   width: 30px;
   margin-right: 10px;
 }
+
+/* Add your own custom styles here */
 .coverImg {
   width: 120px;
   height: 180px;
 }
-/* Add your own custom styles here */
+
+.singleBookDetail > ul{
+  list-style: none;
+}
+
+.singleBookDetail > ul > li {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
