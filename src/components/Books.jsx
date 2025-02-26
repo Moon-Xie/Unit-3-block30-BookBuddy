@@ -8,6 +8,7 @@ an individual book to navigate to the SingleBook component and view its details.
 import React, {useState, useEffect} from "react";
 import SingleBook from "./SingleBook";
 
+
 export default function Books({setBooks}) {
     const [allBooks, setAllBooks] = useState([])
     useEffect(() => {
@@ -35,7 +36,7 @@ export default function Books({setBooks}) {
                     <img src={book.coverimage} alt={book.title} className='coverImg'/>
                     <h4>{book.title}</h4>
                     <h4><b>Author: </b> {book.author}</h4>
-                    <button onClick={() => <SingleBook />}>View details</button>
+                    <SingleBook bookId={book.id}/>
                 </div>
             ))}
         </div>
