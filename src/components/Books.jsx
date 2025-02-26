@@ -7,10 +7,12 @@ an individual book to navigate to the SingleBook component and view its details.
 
 import React, {useState, useEffect} from "react";
 import SingleBook from "./SingleBook";
+import Navigate from "./Navigations";
 
 
 export default function Books({setBooks}) {
     const [allBooks, setAllBooks] = useState([])
+    const [filteredBooks, setFilteredBooks] = useState([])
     useEffect(() => {
         const fetchAllBooks = async () => {
             try {
@@ -20,6 +22,7 @@ export default function Books({setBooks}) {
                     console.log("data is =>", data.books)
                     await setBooks(data.books)
                     await setAllBooks(data.books)
+                    await setFilteredBooks(allBooks)
                 }
             } catch (error) {
                 console.error(error)
@@ -27,19 +30,23 @@ export default function Books({setBooks}) {
         }
         fetchAllBooks();
     }, [])
-    console.log("allBooks are =>", allBooks)
+    console.log("filteredbooks are =>", filteredBooks)
     return (
         <>
-        <div className="bookCards">
-            {allBooks.map((book) => (
-                <div key={book.id} className="bookCard">
-                    <img src={book.coverimage} alt={book.title} className='coverImg'/>
-                    <h4>{book.title}</h4>
-                    <h4><b>Author: </b> {book.author}</h4>
-                    <SingleBook bookId={book.id}/>
-                </div>
-            ))}
-        </div>
+            <nav>
+                <Navigate allBooks={allBooks} setFilteredBooks={setFilteredBooks}/>
+            </nav>
+
+            <div className="bookCards">
+                {filteredBooks.map((book) => (
+                    <div key={book.id} className="bookCard">
+                        <img src={book.coverimage} alt={book.title} className='coverImg'/>
+                        <h4>{book.title}</h4>
+                        <h4><b>Author: </b> {book.author}</h4>
+                        <SingleBook bookId={book.id}/>
+                    </div>
+                ))}
+            </div>
         </>
     )
 }
