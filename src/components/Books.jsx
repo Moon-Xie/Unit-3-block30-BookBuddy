@@ -8,9 +8,11 @@ an individual book to navigate to the SingleBook component and view its details.
 import React, {useState, useEffect} from "react";
 import SingleBook from "./SingleBook";
 import Navigate from "./Navigations";
+import Register from "./Register";
+import Login from "./Login";
 
 
-export default function Books({setBooks}) {
+export default function Books() {
     const [allBooks, setAllBooks] = useState([])
     const [filteredBooks, setFilteredBooks] = useState([])
     useEffect(() => {
@@ -20,9 +22,8 @@ export default function Books({setBooks}) {
                 if(response.ok){
                     const data = await response.json();
                     console.log("data is =>", data.books)
-                    await setBooks(data.books)
                     await setAllBooks(data.books)
-                    await setFilteredBooks(allBooks)
+                    await setFilteredBooks(data.books)
                 }
             } catch (error) {
                 console.error(error)
@@ -35,6 +36,8 @@ export default function Books({setBooks}) {
         <>
             <nav>
                 <Navigate allBooks={allBooks} setFilteredBooks={setFilteredBooks}/>
+                <Register />
+                <Login />
             </nav>
 
             <div className="bookCards">
