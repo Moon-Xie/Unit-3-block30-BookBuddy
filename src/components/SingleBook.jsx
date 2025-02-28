@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import Checkout from "./Checkout"
+import BackHomepage from "./BackHomepage"
 
-export default function SingleBook({bookId}) {
+export default function SingleBook({token, bookId}) {
     const [book, setBook] = useState([])
     let { id } = useParams()
     const navigate = useNavigate()
@@ -19,7 +21,7 @@ export default function SingleBook({bookId}) {
         }
         fetchSingleBook()
     }, [])
-    console.log('book is =>' , book)
+    //console.log('book is =>' , book)
     
     return (
         <>
@@ -28,12 +30,16 @@ export default function SingleBook({bookId}) {
                     <ul>
                         <li><b>{book?.title}</b></li>
                         <li><b>{book?.author}</b></li>
+                        <li>
+                            <b>Checkout Status: </b>
+                            {book?.available ? 'Available' : 'Not available'}
+                        </li>
                         <img src={book?.coverimage} alt={book?.title} />
                         <li>{book?.description}</li>
                     </ul><br/>
-                    <button onClick={() => navigate('/books')}>Back</button>
+                    <BackHomepage />
+                    <Checkout token={token} CheckoutBook={book}/>
                 </div>
-
             ) : (
                 <button onClick={() => navigate(`/books/${bookId}`)}>View details</button>
             )}

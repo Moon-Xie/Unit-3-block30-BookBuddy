@@ -10,9 +10,11 @@ import SingleBook from "./SingleBook";
 import Navigate from "./Navigations";
 import Register from "./Register";
 import Login from "./Login";
+import Checkout from "./Checkout";
+import Account from "./Account";
 
 
-export default function Books({setToken}) {
+export default function Books({token, setToken}) {
     const [allBooks, setAllBooks] = useState([])
     const [filteredBooks, setFilteredBooks] = useState([])
     useEffect(() => {
@@ -21,7 +23,7 @@ export default function Books({setToken}) {
                 const response = await fetch('https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books')
                 if(response.ok){
                     const data = await response.json();
-                    console.log("data is =>", data.books)
+                    //console.log("data is =>", data.books)
                     await setAllBooks(data.books)
                     await setFilteredBooks(data.books)
                 }
@@ -31,13 +33,16 @@ export default function Books({setToken}) {
         }
         fetchAllBooks();
     }, [])
-    console.log("filteredbooks are =>", filteredBooks)
+    //console.log("filteredbooks are =>", filteredBooks)
     return (
         <>
             <nav>
                 <Navigate allBooks={allBooks} setFilteredBooks={setFilteredBooks}/>
-                <Register />
-                <Login setToken={setToken}/>
+                {token ? (<Account setToken={setToken}/>) : (<>
+                    <Register />
+                    <Login setToken={setToken}/>
+                </>)}
+
             </nav>
 
             <div className="bookCards">
@@ -46,7 +51,8 @@ export default function Books({setToken}) {
                         <img src={book.coverimage} alt={book.title} className='coverImg'/>
                         <h4>{book.title}</h4>
                         <h4><b>Author: </b> {book.author}</h4>
-                        <SingleBook bookId={book.id}/>
+                        <SingleBook token={token} bookId={book.id}/>
+                        {/*<Checkout token={token}/>*/}
                     </div>
                 ))}
             </div>

@@ -50,7 +50,9 @@ export default function Register() {
             } catch (error) {
                 console.error(error)
             }
-        }      
+        }  else {
+            setErrorMessage('Firstname/Lastname/Email/Password cannot be blank!')
+        }    
     }
     
     return (
