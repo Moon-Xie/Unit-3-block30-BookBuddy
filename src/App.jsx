@@ -9,6 +9,7 @@ import Login from './components/Login'
 
 function App() {
   const [token, setToken] = useState(null)
+  console.log(token)
   return (
     <>
       <nav className='navBar'> 
@@ -16,10 +17,10 @@ function App() {
         <h3>login/sign up</h3>
       </nav>
       <Routes>
-        <Route path='/books' element={<Books />}/>
+        <Route path='/books' element={<Books setToken={setToken}/>}/>
         <Route path='/books/:id' element={<SingleBook  />}/>
-        <Route path='/registr' element={<Register />}/>
-        <Route path='/login' element={<Login />}/>
+        <Route path='/register' element={<Register />}/>
+        <Route path='/login' element={<Login setToken={setToken}/>}/>
 
       </Routes>
     </>

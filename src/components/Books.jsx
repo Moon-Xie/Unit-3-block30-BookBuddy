@@ -12,7 +12,7 @@ import Register from "./Register";
 import Login from "./Login";
 
 
-export default function Books() {
+export default function Books({setToken}) {
     const [allBooks, setAllBooks] = useState([])
     const [filteredBooks, setFilteredBooks] = useState([])
     useEffect(() => {
@@ -37,7 +37,7 @@ export default function Books() {
             <nav>
                 <Navigate allBooks={allBooks} setFilteredBooks={setFilteredBooks}/>
                 <Register />
-                <Login />
+                <Login setToken={setToken}/>
             </nav>
 
             <div className="bookCards">
