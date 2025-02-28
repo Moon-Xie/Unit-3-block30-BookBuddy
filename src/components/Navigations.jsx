@@ -4,7 +4,6 @@ renders a navigation bar for the different views in your single
 page application. You may consider conditionally rendering some 
 options - for example 'Login' should be available if someone has not logged in yet. 
 */
-import { useState } from "react"
 
 export default function Navigate({allBooks, setFilteredBooks}) {
     const handleSearch = (filteredBook) => {
