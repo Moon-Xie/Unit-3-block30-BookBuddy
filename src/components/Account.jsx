@@ -2,20 +2,66 @@
 account details for a logged in user. Fetch the account data from the provided API. 
 You may consider conditionally rendering a message for other users that prompts 
 them to log in or create an account.  */
-import { Link, useNavigate } from "react-router-dom"
-export default function Account({setToken}) {
-    const navigate = useNavigate('')
+import BackHomepage from "./BackHomepage"
+import Logout from "./Logout"
+import SingleBook from "./SingleBook"
+import { useState, useEffect } from "react"
+
+
+export default function Account({token, setToken}) {
+    const [firstname, setFirstname] = useState('')
+    const [lastname, setLastname] = useState('')
+    const [email, setEmail] = useState('')
+    const [checkoutBooks, setCheckoutBooks] = useState([])
+    
+    useEffect(() => {
+        const fetchUser = async () => {
+            const response = await fetch('https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/me', {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            const result = await response.json()
+            if(response.ok) {
+                try {
+                    console.log(result)
+                    setFirstname(result.firstname)
+                    setLastname(result.lastname)
+                    setEmail(result.email)
+                    setCheckoutBooks(result.books)
+                } catch (error) {
+                    console.error(error)
+                }
+            }
+        }
+        fetchUser()
+    },[])
     return (
         <>
-            <button>Account</button>
-            <button onClick={() => setToken('')}>Logout</button>
-           { /**/}
+        <BackHomepage />
+        <Logout setToken={setToken}/>
+        <div>
+            <h3>Firstname: {firstname}</h3>
+            <h3>Lastname: {lastname}</h3>
+            <h3>Email: {email}</h3>
             <div>
-                <h4>Checkout Books</h4>
+                <h3>You have been checking out:</h3>
+                <div>
+                    {checkoutBooks.map((book) => (
+                        <div key={book.id} className="bookCard">
+                            <img src={book.coverimage} alt={book.title} className='coverImg'/>
+                            <h4>{book.title}</h4>
+                            <h4><b>Author: </b> {book.author}</h4>
+                            <SingleBook />
+                            {/*<Return token={token}/>*/}
+                        </div>
+                    ))}
+                </div>
             </div>
-            <div>
-                <h4>Returned Books</h4>
-            </div>
+        </div>
+            
         </>
     )
 }

@@ -6,17 +6,18 @@ an individual book to navigate to the SingleBook component and view its details.
 */
 
 import React, {useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import SingleBook from "./SingleBook";
 import Navigate from "./Navigations";
 import Register from "./Register";
 import Login from "./Login";
-import Checkout from "./Checkout";
-import Account from "./Account";
+import Logout from "./Logout";
 
 
 export default function Books({token, setToken}) {
     const [allBooks, setAllBooks] = useState([])
     const [filteredBooks, setFilteredBooks] = useState([])
+    const navigate = useNavigate('')
     useEffect(() => {
         const fetchAllBooks = async () => {
             try {
@@ -38,10 +39,17 @@ export default function Books({token, setToken}) {
         <>
             <nav>
                 <Navigate allBooks={allBooks} setFilteredBooks={setFilteredBooks}/>
-                {token ? (<Account setToken={setToken}/>) : (<>
-                    <Register />
-                    <Login setToken={setToken}/>
-                </>)}
+                {token ? (
+                    <>
+                        <button onClick={() => {navigate('/account')}}>Account</button>
+                        <Logout setToken={setToken}/>
+                    </>
+                    ) : (
+                    <>
+                        <Register />
+                        <Login setToken={setToken}/>
+                    </>
+                )}
 
             </nav>
 
