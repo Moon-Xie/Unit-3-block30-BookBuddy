@@ -6,6 +6,7 @@ import SingleBook from './components/SingleBook'
 import Register from './components/Register'
 import Login from './components/Login'
 import Account from './components/Account'
+import Logout from './components/Logout'
 
 function App() {
   const [token, setToken] = useState(null)
@@ -20,7 +21,8 @@ function App() {
         <Route path='/books/:id' element={<SingleBook token={token} />}/>
         <Route path='/register' element={<Register />}/>
         <Route path='/login' element={<Login setToken={setToken}/>}/>
-        <Route path='/api/uers/me' element={<Account />}/>
+        <Route path='/account' element={<Account token={token} setToken={setToken}/>}/>
+        <Route path='/books' element={<Logout setToken={setToken} />}/>
       </Routes>
     </>
   )
