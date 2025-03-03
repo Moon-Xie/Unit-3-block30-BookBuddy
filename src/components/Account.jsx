@@ -54,7 +54,7 @@ export default function Account({token, setToken}) {
                             <img src={book.coverimage} alt={book.title} className='coverImg'/>
                             <h4>{book.title}</h4>
                             <h4><b>Author: </b> {book.author}</h4>
-                            <SingleBook />
+                            
                             {/*<Return token={token}/>*/}
                         </div>
                     ))}

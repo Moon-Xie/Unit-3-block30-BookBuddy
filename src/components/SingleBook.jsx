@@ -32,13 +32,13 @@ export default function SingleBook({token, bookId}) {
                         <li><b>{book?.author}</b></li>
                         <li>
                             <b>Checkout Status: </b>
-                            {book?.available ? 'Available' : 'Not available'}
+                            {(book?.available) ? 'Available' : 'Not available'}
                         </li>
                         <img src={book?.coverimage} alt={book?.title} />
                         <li>{book?.description}</li>
                     </ul><br/>
                     <BackHomepage />
-                    <Checkout token={token} CheckoutBook={book}/>
+                    <Checkout token={token} CheckoutBook={book} />
                 </div>
             ) : (
                 <button onClick={() => navigate(`/books/${bookId}`)}>View details</button>
