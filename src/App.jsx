@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import bookLogo from './assets/books.png'
+import { useNavigate } from 'react-router-dom'
 import Books from './components/Books'
 import { Routes,Route } from 'react-router-dom'
 import SingleBook from './components/SingleBook'
@@ -10,7 +11,13 @@ import Logout from './components/Logout'
 
 function App() {
   const [token, setToken] = useState(null)
+  const navigate = useNavigate('')
   //console.log(token)
+
+  useEffect(() => {
+    setTimeout(() => {navigate('/books')}, 0)
+  },[])
+
   return (
     <>
       <nav className='navBar'> 
