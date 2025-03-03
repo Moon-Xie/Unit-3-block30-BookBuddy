@@ -4,7 +4,7 @@ You may consider conditionally rendering a message for other users that prompts
 them to log in or create an account.  */
 import BackHomepage from "./BackHomepage"
 import Logout from "./Logout"
-import SingleBook from "./SingleBook"
+import Return from "./Return"
 import { useState, useEffect } from "react"
 
 
@@ -13,7 +13,8 @@ export default function Account({token, setToken}) {
     const [lastname, setLastname] = useState('')
     const [email, setEmail] = useState('')
     const [checkoutBooks, setCheckoutBooks] = useState([])
-    
+    const [refreshBooks, setRefreshBooks] = useState([])
+    console.log(checkoutBooks)
     useEffect(() => {
         const fetchUser = async () => {
             const response = await fetch('https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/me', {
@@ -31,13 +32,14 @@ export default function Account({token, setToken}) {
                     setLastname(result.lastname)
                     setEmail(result.email)
                     setCheckoutBooks(result.books)
+                    
                 } catch (error) {
                     console.error(error)
                 }
             }
         }
         fetchUser()
-    },[])
+    },[refreshBooks])
     return (
         <>
         <BackHomepage />
@@ -54,8 +56,8 @@ export default function Account({token, setToken}) {
                             <img src={book.coverimage} alt={book.title} className='coverImg'/>
                             <h4>{book.title}</h4>
                             <h4><b>Author: </b> {book.author}</h4>
-                            
-                            {/*<Return token={token}/>*/}
+                            <Return token={token} bookId={book.id} setRefreshBooks={setRefreshBooks}/>
+                            {/**/}
                         </div>
                     ))}
                 </div>

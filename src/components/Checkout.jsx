@@ -1,8 +1,6 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
 
 export default function Checkout({token, CheckoutBook}) {
-    const navigate = useNavigate('')
     const [errorMessage, setErrorMessage] = useState('')
     const [successMessage, setSuccessMessage] = useState('')
     const handleClick = async (e) => {
@@ -25,6 +23,7 @@ export default function Checkout({token, CheckoutBook}) {
                     const result = await response.json()
                     console.log(result)
                     setSuccessMessage('You have successfully checked out!')
+                    setTimeout(() => setErrorMessage(''), 5000)
                 } else {
                     const response1 = await fetch('https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/reservations', {
                         method: "GET",
@@ -37,11 +36,11 @@ export default function Checkout({token, CheckoutBook}) {
                     console.log('checkout result is =>', result.reservation)
                     const isCheckingout = (result.reservation).some((book) => { return book.title === CheckoutBook.title})
                     if(isCheckingout){
-                        await setErrorMessage('You are currently checking this book out!')
-                        await setTimeout(() => setErrorMessage(''), 5000)
+                        setErrorMessage('You are currently checking this book out!')
+                        setTimeout(() => setErrorMessage(''), 5000)
                     } else{
-                        await setErrorMessage('Sorry, this book is not available right now')
-                        await setTimeout(() => setErrorMessage(''), 5000)
+                        setErrorMessage('Sorry, this book is not available right now')
+                        setTimeout(() => setErrorMessage(''), 5000)
                     }
                 }
             } catch (error) {
@@ -49,7 +48,7 @@ export default function Checkout({token, CheckoutBook}) {
             }
         } else {
             setErrorMessage('You must be logged in to perform this action')
-            await setTimeout(() => setErrorMessage(''), 5000)
+            setTimeout(() => setErrorMessage(''), 5000)
         }
     }
     return (
