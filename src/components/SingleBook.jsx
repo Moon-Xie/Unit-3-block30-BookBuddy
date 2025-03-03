@@ -20,7 +20,7 @@ export default function SingleBook({token, bookId}) {
             }
         }
         fetchSingleBook()
-    }, [])
+    }, [book.available])
     //console.log('book is =>' , book)
     
     return (
