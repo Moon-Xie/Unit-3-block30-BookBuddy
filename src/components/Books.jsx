@@ -46,7 +46,7 @@ export default function Books({token, setToken}) {
                     </>
                     ) : (
                     <>
-                        <Register />
+                        <button onClick={() => navigate('/register')}>Register</button>
                         <Login setToken={setToken}/>
                     </>
                 )}
