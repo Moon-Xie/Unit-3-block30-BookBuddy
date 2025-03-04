@@ -8,6 +8,7 @@ import Register from './components/Register'
 import Login from './components/Login'
 import Account from './components/Account'
 import Logout from './components/Logout'
+import BackHomepage from './components/BackHomepage'
 
 function App() {
   const [token, setToken] = useState(null)
@@ -22,6 +23,23 @@ function App() {
     <>
       <nav className='navBar'> 
         <h1><img id='logo-image' src={bookLogo}/>Library App</h1>
+        {token ? (
+          <>
+            <div className="navButtons">
+                <button onClick={() => {navigate('/books')}}>Home</button>
+                <button onClick={() => {navigate('/account')}}>Account</button>
+                <Logout setToken={setToken}/>
+            </div> 
+          </>
+          ) : (
+          <>
+            <div className="navButtons">
+                <button onClick={() => {navigate('/books')}}>Home</button>
+                <button onClick={() => navigate('/register')}>Register</button>
+                <button onClick={() => navigate('/login')}>Login</button>
+            </div>
+          </>
+        )}
       </nav>
       <Routes>
         <Route path='/books' element={<Books token={token} setToken={setToken}/>}/>

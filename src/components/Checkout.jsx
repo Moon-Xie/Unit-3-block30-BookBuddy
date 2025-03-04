@@ -23,7 +23,7 @@ export default function Checkout({token, CheckoutBook}) {
                     const result = await response.json()
                     console.log(result)
                     setSuccessMessage('You have successfully checked out!')
-                    setTimeout(() => setErrorMessage(''), 5000)
+                    setTimeout(() => setSuccessMessage(''), 5000)
                 } else {
                     const response1 = await fetch('https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/reservations', {
                         method: "GET",
@@ -52,9 +52,13 @@ export default function Checkout({token, CheckoutBook}) {
         }
     }
     return (
-        <>
-            <button onClick={handleClick}>Checkout</button>
-            {errorMessage || successMessage}
+        <> 
+            <div className="checkoutNotice">
+                {errorMessage && (<p>*{errorMessage}</p>)}
+                {successMessage && (<p>*{successMessage}</p>)}
+            </div>
+            
+            <button onClick={handleClick}>Checkout</button> 
         </>
     )
 }

@@ -8,6 +8,7 @@ import BackHomepage from "./BackHomepage"
 export default function SingleBook({token, bookId}) {
     const defaultCover ="https://i.imgur.com/IcMw5fYb.jpg"
     const [book, setBook] = useState([])
+
     let { id } = useParams()
     const navigate = useNavigate()
     useEffect(() => {
@@ -28,6 +29,7 @@ export default function SingleBook({token, bookId}) {
         <>
             {id ? (
                 <div className="singleBookDetail">
+
                     <ul>
                         <li><b>Title: {book?.title}</b></li>
                         <li><b>Author: {book?.author}</b></li>
@@ -38,8 +40,10 @@ export default function SingleBook({token, bookId}) {
                         <img src={book?.coverimage ? book.coverimage : defaultCover} alt={book?.title} />
                         <li><b>Description: </b>{book?.description}</li>
                     </ul><br/>
-                    <BackHomepage />
-                    <Checkout token={token} CheckoutBook={book} />
+                    <div className="buttonDiv">
+                        <BackHomepage />
+                        <Checkout token={token} CheckoutBook={book} />
+                    </div>
                 </div>
             ) : (
                 <button onClick={() => navigate(`/books/${bookId}`)}>View details</button>

@@ -42,25 +42,28 @@ export default function Account({token, setToken}) {
     },[refreshBooks])
     return (
         <>
-        <BackHomepage />
-        <Logout setToken={setToken}/>
-        <div>
+        <div className="account-container">
             <h3>Firstname: {firstname}</h3>
             <h3>Lastname: {lastname}</h3>
             <h3>Email: {email}</h3>
             <div>
                 <h3>You have been checking out:</h3>
-                <div>
-                    {checkoutBooks.map((book) => (
-                        <div key={book.id} className="bookCard">
-                            <img src={book.coverimage} alt={book.title} className='coverImg'/>
-                            <h4>{book.title}</h4>
-                            <h4><b>Author: </b> {book.author}</h4>
-                            <Return token={token} bookId={book.id} setRefreshBooks={setRefreshBooks}/>
-                            {/**/}
-                        </div>
-                    ))}
-                </div>
+                {checkoutBooks.length ? (
+                    <div className="bookCards">
+                        {checkoutBooks.map((book) => (
+                            <div key={book.id} className="bookCard">
+                                <img src={book.coverimage} alt={book.title} className='coverImg'/>
+                                <h4>{book.title}</h4>
+                                <h4><b>Author: </b> {book.author}</h4>
+                                <Return token={token} bookId={book.id} setRefreshBooks={setRefreshBooks}/>
+                                {/**/}
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <p>You haven't checked any books out yet!</p>
+                )}
+
             </div>
         </div>
             
