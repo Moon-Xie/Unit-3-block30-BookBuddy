@@ -1,15 +1,14 @@
-/* TODO - add your code to create a functional React component that renders a login form */
+/* TODO - add your code to create a functional React component 
+that renders a login form */
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 export default function Login({setToken}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [isOpen, setIsOpen] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const [successMessage, setSuccessMessage] = useState('')
     const navigate = useNavigate()
-    const togglePopup = () => setIsOpen(!isOpen)
     const handleSubmit = async (e) => {
         e.preventDefault()
         if(email && password) {
@@ -42,37 +41,37 @@ export default function Login({setToken}) {
     }
     return (
         <>
-            <button onClick={togglePopup}>Login</button>
-            {isOpen && (
-                <div className="popup-overlay">
-                    <div className="popup-box">
-                        <h2>Sign up</h2>
-                        <button onClick={togglePopup}>Cancle</button>
-                        <form id="loginForm" onSubmit={handleSubmit}>                                       
-                            <label>Email:
-                                <input type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                            </label>
-                            <label>Password:
-                                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-                            </label>
-                            {errorMessage && (
-                                <div>
-                                    {/*alert(message)*/}
-                                    <p>{errorMessage}</p>
-                                </div> 
-                            )}
-                            <button type="submit">Submit</button>
-                        </form>
+        
+            {successMessage ?  (
+                <div className="formContainer">
+                    <div className="successContainer">
+                        <h1>Congrandulations!</h1>
+                        <h3>{successMessage}</h3>
+                        <button onClick={() => navigate('/books')}>Back</button>
+                        <button onClick={() => navigate('/account')}>Account</button>
                     </div>
                 </div>
-               
-            )}
-            {successMessage && (
-                <div>
-                    <h4>{successMessage}</h4>
-                    <button onClick={() => navigate('/books')}>Back</button>
-                </div>
                 
+            ) : (
+                <div className="formContainer">
+                    <form className="Form" onSubmit={handleSubmit}>
+                        <h2>Sign up</h2>                                       
+                        <label>Email:
+                            <input type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                        </label>
+                        <label>Password:
+                            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                        </label>
+                        {errorMessage && (
+                            <div>
+                                {/*alert(message)*/}
+                                <p>{errorMessage}</p>
+                            </div> 
+                        )}
+                         <button onClick={() => navigate('/books')}>Cancle</button>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
             )}
         </>
         
