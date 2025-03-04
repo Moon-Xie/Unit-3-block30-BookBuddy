@@ -11,9 +11,46 @@ body {
 }
 
 /* Add your own custom styles here */
+
+/* CSS for Books component */
+.bookCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 10px;
+  justify-content: center;
+}
+
+.bookCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: space-around;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s;
+}
+
 .coverImg {
-  width: 120px;
-  height: 180px;
+  width: 210px;
+  height: 310px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.bookCard h4 {
+  margin: 8px 0;
+  color: #2c3e50;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.bookCard h4 b {
+  font-weight: normal;
+  color: #555;
 }
 
 .singleBookDetail > ul{
@@ -25,9 +62,9 @@ body {
   margin-bottom: 20px;
 }
 
-/* CSS for Register UI*/
+/* CSS for Register and Login form UI*/
 
-#registerContainer {
+.formContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,7 +72,7 @@ body {
   background-color: #f5f5f5;
 }
 
-#registerForm {
+.Form {
   background: white;
   padding: 2rem;
   border-radius: 10px;
@@ -45,13 +82,13 @@ body {
   flex-direction: column;
 }
 
-#registerForm > h2 {
+.Form > h2 {
   text-align: center;
   margin-bottom: 1rem;
   color: #333;
 }
 
-#registerForm > label {
+.Form > label {
   font-size: 14px;
   font-weight: bold;
   margin-bottom: 5px;
@@ -60,7 +97,7 @@ body {
   color: #444;
 }
 
-#registerForm > label > input {
+.Form > label > input {
   padding: 8px;
   margin-top: 3px;
   border: 1px solid #ccc;
@@ -68,14 +105,47 @@ body {
   font-size: 14px;
 }
 
-#registerForm > div > p {
+.Form > div > p {
   color: red;
   font-size: 14px;
   margin-top: 5px;
   text-align: center;
 }
 
-#registerForm > button {
+.Form > button {
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.successContainer {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.successContainer > h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.successContainer > h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.successContainer > button {
   margin-top: 10px;
   padding: 10px;
   font-size: 14px;
@@ -86,7 +156,7 @@ body {
 }
 
 @media (max-width: 400px) {
-  #registerForm {
+  .Form, .successContainer{
       width: 90%;
   }
 }

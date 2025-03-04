@@ -9,15 +9,15 @@ import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import SingleBook from "./SingleBook";
 import Navigate from "./Navigations";
-import Register from "./Register";
-import Login from "./Login";
 import Logout from "./Logout";
+
 
 
 export default function Books({token, setToken}) {
     const [allBooks, setAllBooks] = useState([])
     const [filteredBooks, setFilteredBooks] = useState([])
     const navigate = useNavigate('')
+    const defaultCover ="https://i.imgur.com/IcMw5fYb.jpg"
     useEffect(() => {
         const fetchAllBooks = async () => {
             try {
@@ -47,7 +47,7 @@ export default function Books({token, setToken}) {
                     ) : (
                     <>
                         <button onClick={() => navigate('/register')}>Register</button>
-                        <Login setToken={setToken}/>
+                        <button onClick={() => navigate('/login')}>Login</button>
                     </>
                 )}
 
@@ -56,7 +56,9 @@ export default function Books({token, setToken}) {
             <div className="bookCards">
                 {filteredBooks.map((book) => (
                     <div key={book.id} className="bookCard">
-                        <img src={book.coverimage} alt={book.title} className='coverImg'/>
+                        <img src={book?.coverimage.trim() ? book.coverimage : defaultCover} 
+                            alt={book.title} 
+                            className='coverImg'/>
                         <h4>{book.title}</h4>
                         <h4><b>Author: </b> {book.author}</h4>
                         <SingleBook token={token} bookId={book.id}/>

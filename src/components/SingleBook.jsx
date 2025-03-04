@@ -6,6 +6,7 @@ import Checkout from "./Checkout"
 import BackHomepage from "./BackHomepage"
 
 export default function SingleBook({token, bookId}) {
+    const defaultCover ="https://i.imgur.com/IcMw5fYb.jpg"
     const [book, setBook] = useState([])
     let { id } = useParams()
     const navigate = useNavigate()
@@ -21,21 +22,21 @@ export default function SingleBook({token, bookId}) {
         }
         fetchSingleBook()
     }, [book.available])
-    //console.log('book is =>' , book)
+    console.log('book is =>' , book)
     
     return (
         <>
             {id ? (
                 <div className="singleBookDetail">
                     <ul>
-                        <li><b>{book?.title}</b></li>
-                        <li><b>{book?.author}</b></li>
+                        <li><b>Title: {book?.title}</b></li>
+                        <li><b>Author: {book?.author}</b></li>
                         <li>
                             <b>Checkout Status: </b>
                             {(book?.available) ? 'Available' : 'Not available'}
                         </li>
-                        <img src={book?.coverimage} alt={book?.title} />
-                        <li>{book?.description}</li>
+                        <img src={book?.coverimage ? book.coverimage : defaultCover} alt={book?.title} />
+                        <li><b>Description: </b>{book?.description}</li>
                     </ul><br/>
                     <BackHomepage />
                     <Checkout token={token} CheckoutBook={book} />

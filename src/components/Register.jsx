@@ -55,9 +55,22 @@ export default function Register() {
     
     return (
         <>
-            <div id="registerContainer">
+            {successMessage ? (
+               <>
+               <div className="formContainer">
+                    <div className="successContainer">
+                        <h1>Congrandulations!</h1>
+                        <h3> {successMessage}</h3>
+                        <button onClick={() => navigate('/books')}>Back</button>
+                        <button onClick={() => navigate('/login')}>Login</button>
+                    </div>
+               </div>
+               
+               </>
+            ) : (
+                <div className="formContainer">
                 
-                <form id="registerForm" onSubmit={handleSubmit}>
+                <form className="Form" onSubmit={handleSubmit}>
                     <h2>Sign up</h2>
                     <label>Firstname:
                         <input type="text" value={firstname} onChange={(e) => setFirstname(e.target.value)}/>
@@ -76,14 +89,14 @@ export default function Register() {
                     
                     {errorMessage && (
                         <div>
-                            {/*alert(message)*/}
-                            <p>{errorMessage || successMessage}</p>
+                            <p>{errorMessage}</p>
                         </div> 
                     )}
                     <button onClick={() => navigate('/books')}>Back</button>
                     <button type="submit">Submit</button>
                 </form>
             </div>
+            )}     
 </>
         
     )
