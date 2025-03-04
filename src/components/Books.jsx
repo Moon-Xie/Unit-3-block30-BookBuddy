@@ -37,20 +37,10 @@ export default function Books({token, setToken}) {
     //console.log("filteredbooks are =>", filteredBooks)
     return (
         <>
-            <nav>
-                <Navigate allBooks={allBooks} setFilteredBooks={setFilteredBooks}/>
-                {token ? (
-                    <>
-                        <button onClick={() => {navigate('/account')}}>Account</button>
-                        <Logout setToken={setToken}/>
-                    </>
-                    ) : (
-                    <>
-                        <button onClick={() => navigate('/register')}>Register</button>
-                        <button onClick={() => navigate('/login')}>Login</button>
-                    </>
-                )}
-
+            <nav className='filterContainer'>
+                <div className="filter">
+                    <Navigate allBooks={allBooks} setFilteredBooks={setFilteredBooks}/>
+                </div>
             </nav>
 
             <div className="bookCards">
