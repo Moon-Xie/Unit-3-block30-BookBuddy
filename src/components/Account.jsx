@@ -12,7 +12,6 @@ export default function Account({ token }) {
     const [email, setEmail] = useState('')
     const [checkoutBooks, setCheckoutBooks] = useState([])
     const [refreshBooks, setRefreshBooks] = useState([])
-    console.log(checkoutBooks)
     useEffect(() => {
         const fetchUser = async () => {
             const response = await fetch('https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/me', {

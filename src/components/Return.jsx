@@ -1,7 +1,6 @@
 export default function Return({token, bookId, setRefreshBooks}) {
     const handleClick = async (e) => {
         e.preventDefault()
-        console.log(token)
         if(token) {
             try {
                 const response = await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/reservations/${bookId}`, {
