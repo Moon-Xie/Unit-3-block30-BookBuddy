@@ -1,14 +1,12 @@
 import { useState } from "react"
 
-export default function Checkout({token, CheckoutBook}) {
+export default function Checkout({token, CheckoutBook, onSuccess=()=>{}}) {
     const [errorMessage, setErrorMessage] = useState('')
     const [successMessage, setSuccessMessage] = useState('')
     const handleClick = async (e) => {
         e.preventDefault()
         if(token) {
             try {
-                //console.log(CheckoutBook.available)
-                //console.log(token)
                 if(CheckoutBook.available) {
                         const response = await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books/${CheckoutBook.id}`, {
                         method: "PATCH",
@@ -21,7 +19,7 @@ export default function Checkout({token, CheckoutBook}) {
                         })
                     })
                     const result = await response.json()
-                    console.log(result)
+                    onSuccess(result.book)
                     setSuccessMessage('You have successfully checked out!')
                     setTimeout(() => setSuccessMessage(''), 5000)
                 } else {
@@ -33,7 +31,6 @@ export default function Checkout({token, CheckoutBook}) {
                         }
                     })
                     const result = await response1.json()
-                    console.log('checkout result is =>', result.reservation)
                     const isCheckingout = (result.reservation).some((book) => { return book.title === CheckoutBook.title})
                     if(isCheckingout){
                         setErrorMessage('You are currently checking this book out!')
