@@ -35,7 +35,6 @@ export default function Register() {
                 )
                 const result = await response.json()
                 if(response.ok){
-           
                     setSuccessMessage(result.message)
                     setFirstname('')
                     setLastname('')

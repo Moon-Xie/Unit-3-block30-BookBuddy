@@ -8,12 +8,10 @@ import Register from './components/Register'
 import Login from './components/Login'
 import Account from './components/Account'
 import Logout from './components/Logout'
-import BackHomepage from './components/BackHomepage'
 
 function App() {
   const [token, setToken] = useState(null)
   const navigate = useNavigate('')
-  //console.log(token)
 
   useEffect(() => {
     setTimeout(() => {navigate('/books')}, 0)

@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import Checkout from "./Checkout"
-import BackHomepage from "./BackHomepage"
 
 export default function SingleBook({token, bookId}) {
     const defaultCover ="https://i.imgur.com/IcMw5fYb.jpg"
@@ -37,17 +36,18 @@ export default function SingleBook({token, bookId}) {
                             <b>Checkout Status: </b>
                             {(book?.available) ? 'Available' : 'Not available'}
                         </li>
-                        <img src={book?.coverimage}
-                             onError={({ currentTarget }) => {
-                                currentTarget.onerror = null; // prevents looping
-                                currentTarget.src = defaultCover;
-                            }}
-                             alt={book?.title} />
+                        <img src={book?.coverimage ? book.coverimage : defaultCover}
+                                onError={({ currentTarget }) => {
+                                    currentTarget.onerror = null; // prevents looping
+                                    currentTarget.src = defaultCover;
+                                }}
+                                alt={book?.title} 
+                         />
                         <li><b>Description: </b>{book?.description}</li>
                     </ul><br/>
                     <div className="buttonDiv">
-                        <BackHomepage />
-                        <Checkout token={token} CheckoutBook={book} onSuccess={setBook} />
+                        <button onClick={() => navigate('/books')}>Back</button>
+                        <Checkout token={token} CheckoutBook={book} onSuccess={setBook}/>
                     </div>
                 </div>
             ) : (

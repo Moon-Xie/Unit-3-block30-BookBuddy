@@ -2,13 +2,11 @@
 account details for a logged in user. Fetch the account data from the provided API. 
 You may consider conditionally rendering a message for other users that prompts 
 them to log in or create an account.  */
-import BackHomepage from "./BackHomepage"
-import Logout from "./Logout"
 import Return from "./Return"
 import { useState, useEffect } from "react"
 
 
-export default function Account({token, setToken}) {
+export default function Account({ token }) {
     const [firstname, setFirstname] = useState('')
     const [lastname, setLastname] = useState('')
     const [email, setEmail] = useState('')
@@ -27,7 +25,6 @@ export default function Account({token, setToken}) {
             const result = await response.json()
             if(response.ok) {
                 try {
-                    console.log(result)
                     setFirstname(result.firstname)
                     setLastname(result.lastname)
                     setEmail(result.email)
