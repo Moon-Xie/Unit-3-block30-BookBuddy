@@ -6,4 +6,4 @@ We are working with a new client who is wanting to design an online library for 
 
 Details on the API can be found 🔗 [here](https://fsa-book-buddy-b6e748d1380d.herokuapp.com/docs/)
 
-Deployment Link: https://67c7954eeb254cfb4b552dbc--leafy-monstera-3a7f97.netlify.app
+Deployment Link: https://67c7a41d64e19f120e746b5e--jade-queijadas-ce63f4.netlify.app
