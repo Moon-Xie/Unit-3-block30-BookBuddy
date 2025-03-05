@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function Checkout({token, CheckoutBook, onSuccess=()=>{}}) {
+export default function Checkout({token, CheckoutBook, onSuccess = () => {}}) {
     const [errorMessage, setErrorMessage] = useState('')
     const [successMessage, setSuccessMessage] = useState('')
     const handleClick = async (e) => {

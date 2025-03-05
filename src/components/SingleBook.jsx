@@ -6,7 +6,7 @@ import Checkout from "./Checkout"
 
 export default function SingleBook({token, bookId}) {
     const defaultCover ="https://i.imgur.com/IcMw5fYb.jpg"
-    const [book, setBook] = useState([])
+    const [book, setBook] = useState({})
 
     let { id } = useParams()
     const navigate = useNavigate()

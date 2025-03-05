@@ -22,6 +22,7 @@ export default function Books({ token }) {
                 const response = await fetch('https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books')
                 if(response.ok){
                     const data = await response.json();
+
                     setAllBooks(data.books)
                     setFilteredBooks(data.books)
                 }
@@ -46,7 +47,7 @@ export default function Books({ token }) {
                             onError={({ currentTarget }) => {
                                 currentTarget.onerror = null; // prevents looping
                                 currentTarget.src = defaultCover;
-                            }} 
+                            }}
                             alt={book.title} 
                             className='coverImg'/>
                         <h4>{book.title}</h4>
