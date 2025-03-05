@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function Checkout({token, CheckoutBook}) {
+export default function Checkout({token, CheckoutBook, onSuccess = () => {}}) {
     const [errorMessage, setErrorMessage] = useState('')
     const [successMessage, setSuccessMessage] = useState('')
     const handleClick = async (e) => {
@@ -21,7 +21,8 @@ export default function Checkout({token, CheckoutBook}) {
                         })
                     })
                     const result = await response.json()
-                    console.log(result)
+                    console.log('checkout result => ', result)
+                    onSuccess(result.book)
                     setSuccessMessage('You have successfully checked out!')
                     setTimeout(() => setSuccessMessage(''), 5000)
                 } else {
