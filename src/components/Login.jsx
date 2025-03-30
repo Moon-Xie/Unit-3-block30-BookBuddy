@@ -44,7 +44,7 @@ export default function Login({setToken}) {
             {successMessage ?  (
                 <div className="formContainer">
                     <div className="successContainer">
-                        <h1>Congrandulations!</h1>
+                        <h1>Congratulations!</h1>
                         <h3>{successMessage}</h3>
                         <button onClick={() => navigate('/books')}>Back</button>
                         <button onClick={() => navigate('/account')}>Account</button>

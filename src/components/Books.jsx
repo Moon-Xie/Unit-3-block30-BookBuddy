@@ -23,8 +23,8 @@ export default function Books({ token }) {
                 if(response.ok){
                     const data = await response.json();
 
-                    setAllBooks(data.books)
-                    setFilteredBooks(data.books)
+                    setAllBooks(data.books || data)
+                    setFilteredBooks(data.books || data)
                 }
             } catch (error) {
                 console.error(error)
