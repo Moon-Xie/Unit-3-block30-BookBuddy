@@ -21,7 +21,7 @@ export default function SingleBook({token, bookId}) {
             }
         }
         fetchSingleBook()
-    }, [book.available])
+    }, [book?.available])
     
     return (
         <>
